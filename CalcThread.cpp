@@ -1,10 +1,15 @@
 #include "CalcThread.h"
 
-CalcThread::CalcThread(QQueue<QString>& que_Request, QMutex& mtx_Request, QWaitCondition& cond_Request, QObject *parent)
+CalcThread::CalcThread(QQueue<QString>& que_Request, QMutex& mtx_Request,
+                       QWaitCondition& cond_Request, QQueue<QString>& que_Result,
+                       QMutex& mtx_Result, QWaitCondition& cond_Result, GUIThread& gui_Thread,
+                       QObject *parent)
     : QThread(parent),
-      m_que_Request(&que_Request), m_mtx_Request(&mtx_Request), m_cond_Request(&cond_Request)
+      m_que_Request(&que_Request), m_mtx_Request(&mtx_Request),
+      m_cond_Request(&cond_Request), m_que_Result(&que_Result),
+      m_mtx_Result(&mtx_Result), m_cond_Result(&cond_Result),m_gui_Thread(&gui_Thread)
 {
-
+    connect(this, &CalcThread::resultIsReady, m_gui_Thread, &GUIThread::on_resultIsReady);
 }
 
 CalcThread::~CalcThread()
@@ -21,16 +26,22 @@ void CalcThread::run()
 {
     while(!m_stopRequested){
         m_mtx_Request->lock();
+
         if(m_que_Request->isEmpty() && !m_stopRequested){
             m_cond_Request->wait(m_mtx_Request);
         }
-        if (m_stopRequested) {
+
+        if (m_stopRequested){
             break;
         }
+
         QString msg = m_que_Request->dequeue();
         m_mtx_Request->unlock();
         QThread::sleep(1);
-        qDebug( )<< msg << '\n';
+        m_mtx_Result->lock();
+        m_que_Result->enqueue(msg);
+        m_mtx_Result->unlock();
+        emit resultIsReady();
     }
 }
 

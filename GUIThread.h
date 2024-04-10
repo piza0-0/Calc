@@ -16,12 +16,16 @@ class GUIThread : public QMainWindow
     Q_OBJECT
 
 public:
-    friend class CalcThread;
-
-    GUIThread(QQueue<QString>& que_Request, QMutex& mtx_Request, QWaitCondition& cond_Request, QWidget *parent = nullptr);
+    GUIThread(QQueue<QString>& que_Request, QMutex& mtx_Request,
+              QWaitCondition& cond_Request, QQueue<QString>& que_Result,
+              QMutex& mtx_Result, QWaitCondition& cond_Result,
+              QWidget *parent = nullptr);
 
     ~GUIThread();
 
+
+public slots:
+    void on_resultIsReady();
 
 private slots:
     void on_pushButton_clicked();
@@ -29,9 +33,15 @@ private slots:
 private:
 
     QQueue<QString>* m_que_Request;
-    QMutex* m_mtx_Request;
-    QString msg = "Hello buddy";
+    QMutex* m_mtx_Request;    
     QWaitCondition* m_cond_Request;
+
+    QQueue<QString>* m_que_Result;
+    QMutex* m_mtx_Result;
+    QWaitCondition* m_cond_Result;
+
+    QString msg = "Hello buddy";
+
     Ui::GUIThread *ui;
 
 };

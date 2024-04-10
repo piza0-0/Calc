@@ -7,18 +7,22 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
+    QQueue<QString> que_Request;
     QMutex mtx_Request;
     QWaitCondition cond_Request;
-    QQueue<QString> que_Request;
 
-//    QMutex mtx_Result;
-//    QWaitCondition cond_Result;
-//    QQueue<QString> que_Result;
+    QQueue<QString> que_Result;
+    QMutex mtx_Result;
+    QWaitCondition cond_Result;
 
-    GUIThread w(que_Request, mtx_Request, cond_Request);
-    CalcThread calc_Thread(que_Request, mtx_Request, cond_Request);
+    GUIThread gui_thread(que_Request, mtx_Request, cond_Request,
+                que_Result, mtx_Result, cond_Result);
+    CalcThread calc_Thread(que_Request, mtx_Request, cond_Request,
+                           que_Result, mtx_Result, cond_Result, gui_thread);
+
+    //connect(calc_Thread, &CalcThread::resultIsReady, gui_thread, &GUIThread::on_resultIsReady);
     calc_Thread.start();
 
-    w.show();    
+    gui_thread.show();
     return a.exec();
 }
