@@ -10,11 +10,13 @@ CONFIG += c++11
 
 SOURCES += \
     CalcThread.cpp \
+    Calculator.cpp \
     GUIThread.cpp \
     main.cpp
 
 HEADERS += \
     CalcThread.h \
+    Calculator.h \
     GUIThread.h
 
 FORMS += \

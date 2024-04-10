@@ -2,13 +2,14 @@
 #define CALCTHREAD_H
 
 #include "GUIThread.h"
+#include "Calculator.h"
 
 #include <QThread>
 #include <QMutex>
 #include <QWaitCondition>
 #include <QQueue>
 #include <QDebug>
-
+#include <stdexcept>
 
 class CalcThread : public QThread
 {
@@ -16,7 +17,7 @@ class CalcThread : public QThread
 public:
 
     explicit CalcThread(QQueue<QString>& que_Request, QMutex& mtx_Request,
-                        QWaitCondition& cond_Request, QQueue<QString>& que_Result,
+                        QWaitCondition& cond_Request, QQueue<double>& que_Result,
                         QMutex& mtx_Result, QWaitCondition& cond_Result, GUIThread& gui_Thread,
                         QObject *parent = nullptr);
     ~CalcThread();
@@ -36,10 +37,11 @@ private:
      QMutex* m_mtx_Request;
      QWaitCondition* m_cond_Request;
 
-     QQueue<QString>* m_que_Result;
+     QQueue<double>* m_que_Result;
      QMutex* m_mtx_Result;
      QWaitCondition* m_cond_Result;
 
+     Calucator calc;
      GUIThread *m_gui_Thread;
      bool m_stopRequested = false;
 };

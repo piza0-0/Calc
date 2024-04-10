@@ -3,7 +3,7 @@
 
 
 GUIThread::GUIThread(QQueue<QString>& que_Request, QMutex& mtx_Request,
-                     QWaitCondition& cond_Request, QQueue<QString>& que_Result,
+                     QWaitCondition& cond_Request, QQueue<double>& que_Result,
                      QMutex& mtx_Result, QWaitCondition& cond_Result, QWidget *parent)
     : QMainWindow(parent),
       m_que_Request(&que_Request), m_mtx_Request(&mtx_Request),
@@ -25,10 +25,10 @@ void GUIThread::on_resultIsReady()
 {
     blockSignals(true);
     m_mtx_Result->lock();
-    QString msq = m_que_Result->dequeue();
+    double result = m_que_Result->dequeue();
     m_mtx_Result->unlock();
 
-    qDebug() << msg << " 2-ая очередь"<<'\n';
+    qDebug() << result << " 2-ая очередь"<<'\n';
     blockSignals(false);
 }
 

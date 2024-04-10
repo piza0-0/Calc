@@ -17,7 +17,7 @@ class GUIThread : public QMainWindow
 
 public:
     GUIThread(QQueue<QString>& que_Request, QMutex& mtx_Request,
-              QWaitCondition& cond_Request, QQueue<QString>& que_Result,
+              QWaitCondition& cond_Request, QQueue<double>& que_Result,
               QMutex& mtx_Result, QWaitCondition& cond_Result,
               QWidget *parent = nullptr);
 
@@ -36,7 +36,7 @@ private:
     QMutex* m_mtx_Request;    
     QWaitCondition* m_cond_Request;
 
-    QQueue<QString>* m_que_Result;
+    QQueue<double>* m_que_Result;
     QMutex* m_mtx_Result;
     QWaitCondition* m_cond_Result;
 

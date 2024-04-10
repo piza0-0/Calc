@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
     QMutex mtx_Request;
     QWaitCondition cond_Request;
 
-    QQueue<QString> que_Result;
+    QQueue<double> que_Result;
     QMutex mtx_Result;
     QWaitCondition cond_Result;
 
