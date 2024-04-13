@@ -39,6 +39,7 @@ void GUIThread::on_equalButtonClicked(QString msg)
 {
     m_mtx_Request->lock();
     m_que_Request->enqueue(msg);
+    emit requestsNumberLeft(m_que_Request->size());
     qDebug() << "main put task..." << '\n';
     m_cond_Request->wakeOne();
     m_mtx_Request->unlock();

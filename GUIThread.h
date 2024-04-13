@@ -26,7 +26,7 @@ public:
 
 signals:
     void resultIsReady(QString expression,double result);
-
+    void requestsNumberLeft(int left);
 
 public slots:
     void on_resultIsReady();

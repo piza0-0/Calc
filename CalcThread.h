@@ -31,7 +31,7 @@ public:
 signals:
     void resultIsReady();
     void calcError(QString expression, QString errorLog);
-
+    void requestsNumberLeft(int left);
 
 private:
      QQueue<QString>* m_que_Request;
