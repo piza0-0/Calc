@@ -255,6 +255,7 @@ GridLayout {
                 text: "="
                 onClicked:{
                     equalButtonClicked(txtinput.text)
+                    txtinput.clear()
                 }
             }
         }
@@ -319,14 +320,5 @@ GridLayout {
 
 
     }
-//    Connections{
-
-//    }
-//    Connections{
-//        target: back
-//        function onExpressionChanged(){
-//            consloe.log("Text changed")
-//        }
-//    }
 
 }

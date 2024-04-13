@@ -3,8 +3,9 @@
 
 
 GUIThread::GUIThread(QQueue<QString>& que_Request, QMutex& mtx_Request,
-                     QWaitCondition& cond_Request, QQueue<double>& que_Result,
-                     QMutex& mtx_Result, QWaitCondition& cond_Result, QObject *parent)
+                     QWaitCondition& cond_Request, QQueue<QPair<QString, double>>& que_Result,
+                     QMutex& mtx_Result, QWaitCondition& cond_Result,
+                     QObject *parent)
       :QObject(parent),
       m_que_Request(&que_Request), m_mtx_Request(&mtx_Request),
       m_cond_Request(&cond_Request), m_que_Result(&que_Result),
@@ -25,11 +26,13 @@ void GUIThread::on_resultIsReady()
 {
     blockSignals(true);
     m_mtx_Result->lock();
-    double result = m_que_Result->dequeue();
+    QPair<QString, double> resExpr = m_que_Result->dequeue();
     m_mtx_Result->unlock();
 
-    qDebug() << result << " 2-ая очередь"<<'\n';
-    //  blockSignals(false);
+    qDebug() << resExpr.second << " 2-ая очередь"<<'\n';
+    blockSignals(false);
+    emit resultIsReady(resExpr.first,resExpr.second);
+
 }
 
 void GUIThread::on_equalButtonClicked(QString msg)

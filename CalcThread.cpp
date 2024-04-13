@@ -1,7 +1,7 @@
 #include "CalcThread.h"
 
 CalcThread::CalcThread(QQueue<QString>& que_Request, QMutex& mtx_Request,
-                       QWaitCondition& cond_Request, QQueue<double>& que_Result,
+                       QWaitCondition& cond_Request, QQueue<QPair<QString, double>>& que_Result,
                        QMutex& mtx_Result, QWaitCondition& cond_Result, GUIThread& gui_Thread,
                        QObject *parent)
     : QThread(parent),
@@ -38,16 +38,19 @@ void CalcThread::run()
         QString expression = m_que_Request->dequeue();
         m_mtx_Request->unlock();
 
-        double result = 0.0;
+        double result = 0.0;        
         try{
         result = calc.Calculate(expression);
         }catch(std::logic_error& e){
             qDebug() << e.what() << '\n';
+            QString errorLog = e.what();
+            emit calcError(expression, errorLog);
+            continue;
         }
-
         QThread::sleep(1);
-        m_mtx_Result->lock();
-        m_que_Result->enqueue(result);
+        QPair <QString, double> expResult(expression, result);
+        m_mtx_Result->lock();        
+        m_que_Result->enqueue(expResult);
         m_mtx_Result->unlock();
 
         emit resultIsReady();

@@ -1,7 +1,6 @@
 #include "GUIThread.h"
 #include "CalcThread.h"
 
-#include "TableModel.h"
 
 #include <QGuiApplication>
 #include <QQmlContext>
@@ -26,34 +25,25 @@ int main(int argc, char *argv[])
             QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
 
-    qmlRegisterType<TableModel>("TableModel", 1, 0, "TableModel");
-
-    TableModel model;
-
     QQueue<QString> que_Request;
     QMutex mtx_Request;
     QWaitCondition cond_Request;
 
-    QQueue<double> que_Result;
+    QQueue<QPair<QString, double>> que_Result;
     QMutex mtx_Result;
     QWaitCondition cond_Result;
 
     GUIThread gui_thread(que_Request, mtx_Request, cond_Request,
-                         que_Result, mtx_Result, cond_Result,&app);
+                         que_Result, mtx_Result, cond_Result, &app);
     CalcThread calc_Thread(que_Request, mtx_Request, cond_Request,
                            que_Result, mtx_Result, cond_Result, gui_thread,&app);
 
-    engine.rootContext()->setContextProperty("model", &model);
     engine.rootContext()->setContextProperty("gui_thread", &gui_thread);
+    engine.rootContext()->setContextProperty("clac_thread", &calc_Thread);
 
     engine.load(url);
 
 
-    //connect(calc_Thread, &CalcThread::resultIsReady, gui_thread, &GUIThread::on_resultIsReady);
     calc_Thread.start();
-
-    //gui_thread.show();
-
     return app.exec();
-    //return a.exec();
 }

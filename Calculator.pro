@@ -12,14 +12,12 @@ SOURCES += \
     CalcThread.cpp \
     Calculator.cpp \
     GUIThread.cpp \
-    TableModel.cpp \
     main.cpp
 
 HEADERS += \
     CalcThread.h \
     Calculator.h \
-    GUIThread.h \
-    TableModel.h
+    GUIThread.h
 
 
 # Default rules for deployment.

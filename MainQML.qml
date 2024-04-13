@@ -2,7 +2,6 @@ import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick 2.12
 import Qt.labs.qmlmodels 1.0
-import TableModel 1.0
 import QtQuick.Layouts 1.1
 
 
@@ -14,7 +13,7 @@ Window {
 
     signal equalButtonClicked(string msg)
 
-    title: qsTr("Hello World")
+    title: qsTr("Калькулятор")
 
     TableView {
         id: tv
@@ -23,11 +22,16 @@ Window {
         height: parent.height/2
         anchors.top: parent.top
         anchors.horizontalCenter: parent.horizontalCenter
-        columnSpacing: 1
-        rowSpacing: 1
+        //columnSpacing: 1
+        //rowSpacing: 1
         clip: true
 
-        model: TableModel {}
+
+        model: TableModel {
+            id: tModel
+            TableModelColumn { display: "name" }
+            TableModelColumn { display: "color" }
+        }
 
         delegate: Rectangle {
             id:deleg
@@ -37,7 +41,6 @@ Window {
             Text {
                 text: display
                 anchors.centerIn: deleg
-
             }
         }
         onWidthChanged: {
@@ -63,6 +66,23 @@ Window {
     Component.onCompleted: {
         equalButtonClicked.connect(gui_thread.on_equalButtonClicked)
     }
+    Connections{
+        target: gui_thread
+        function onResultIsReady(expression,result){
+            tModel.insertRow(0, {name: expression+" =", color: result});
+
+        }
+    }
+    Connections{
+        target: clac_thread
+        function onCalcError(expression, errorLog){
+            tModel.insertRow(0, {name: expression+" =", color: errorLog});
+
+        }
+    }
+
+
+
 
 
 }

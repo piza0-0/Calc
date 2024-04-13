@@ -17,7 +17,7 @@ class CalcThread : public QThread
 public:
 
     explicit CalcThread(QQueue<QString>& que_Request, QMutex& mtx_Request,
-                        QWaitCondition& cond_Request, QQueue<double>& que_Result,
+                        QWaitCondition& cond_Request, QQueue<QPair<QString, double>>& que_Result,
                         QMutex& mtx_Result, QWaitCondition& cond_Result, GUIThread& gui_Thread,
                         QObject *parent = nullptr);
     ~CalcThread();
@@ -30,6 +30,7 @@ public:
 
 signals:
     void resultIsReady();
+    void calcError(QString expression, QString errorLog);
 
 
 private:
@@ -37,7 +38,7 @@ private:
      QMutex* m_mtx_Request;
      QWaitCondition* m_cond_Request;
 
-     QQueue<double>* m_que_Result;
+     QQueue<QPair<QString, double>>* m_que_Result;
      QMutex* m_mtx_Result;
      QWaitCondition* m_cond_Result;
 
