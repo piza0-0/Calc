@@ -1,17 +1,18 @@
 #ifndef GUITHREAD_H
 #define GUITHREAD_H
 
-#include <QMainWindow>
+#include <QObject>
 #include <QMutex>
 #include <QQueue>
 #include <QWaitCondition>
 #include <QDebug>
 
-QT_BEGIN_NAMESPACE
-namespace Ui { class GUIThread; }
-QT_END_NAMESPACE
+//QT_BEGIN_NAMESPACE
+//namespace Ui { class GUIThread; }
+//QT_END_NAMESPACE
 
-class GUIThread : public QMainWindow
+class GUIThread : public QObject
+        //: public QMainWindow
 {
     Q_OBJECT
 
@@ -19,7 +20,7 @@ public:
     GUIThread(QQueue<QString>& que_Request, QMutex& mtx_Request,
               QWaitCondition& cond_Request, QQueue<double>& que_Result,
               QMutex& mtx_Result, QWaitCondition& cond_Result,
-              QWidget *parent = nullptr);
+              QObject *parent = nullptr);
 
     ~GUIThread();
 
@@ -28,7 +29,7 @@ public slots:
     void on_resultIsReady();
 
 private slots:
-    void on_pushButton_clicked();
+    //void on_pushButton_clicked();
 
 private:
 
@@ -42,7 +43,7 @@ private:
 
     QString msg = "Hello buddy";
 
-    Ui::GUIThread *ui;
+    //Ui::GUIThread *ui;
 
 };
 #endif // GUITHREAD_H

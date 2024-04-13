@@ -4,21 +4,21 @@
 
 GUIThread::GUIThread(QQueue<QString>& que_Request, QMutex& mtx_Request,
                      QWaitCondition& cond_Request, QQueue<double>& que_Result,
-                     QMutex& mtx_Result, QWaitCondition& cond_Result, QWidget *parent)
-    : QMainWindow(parent),
+                     QMutex& mtx_Result, QWaitCondition& cond_Result, QObject *parent)
+      :QObject(parent),
       m_que_Request(&que_Request), m_mtx_Request(&mtx_Request),
       m_cond_Request(&cond_Request), m_que_Result(&que_Result),
-      m_mtx_Result(&mtx_Result), m_cond_Result(&cond_Result),
-      ui(new Ui::GUIThread)
+      m_mtx_Result(&mtx_Result), m_cond_Result(&cond_Result)
+    //  ui(new Ui::GUIThread)
 {
-    ui->setupUi(this);
+    //ui->setupUi(this);
 
 }
 
 
 GUIThread::~GUIThread()
 {
-    delete ui;
+    //delete ui;
 }
 
 void GUIThread::on_resultIsReady()
@@ -29,18 +29,18 @@ void GUIThread::on_resultIsReady()
     m_mtx_Result->unlock();
 
     qDebug() << result << " 2-ая очередь"<<'\n';
-    blockSignals(false);
+  //  blockSignals(false);
 }
 
-void GUIThread::on_pushButton_clicked()
-{
-    m_mtx_Request->lock();
-    m_que_Request->enqueue(msg);
-    qDebug() << "main put task..." << '\n';
-    m_cond_Request->wakeOne();
-    m_mtx_Request->unlock();
+//void GUIThread::on_pushButton_clicked()
+//{
+//    m_mtx_Request->lock();
+//    m_que_Request->enqueue(msg);
+//    qDebug() << "main put task..." << '\n';
+//    m_cond_Request->wakeOne();
+//    m_mtx_Request->unlock();
 
-}
+//}
 
 
 
