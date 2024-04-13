@@ -1,7 +1,8 @@
 #include "GUIThread.h"
 #include "CalcThread.h"
 
-//#include <QApplication>
+#include "TableModel.h"
+
 #include <QGuiApplication>
 #include <QQmlContext>
 #include <QQmlApplicationEngine>
@@ -24,6 +25,11 @@ int main(int argc, char *argv[])
         if (!obj && url == objUrl)
             QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
+
+    qmlRegisterType<TableModel>("TableModel", 1, 0, "TableModel");
+
+    TableModel model;
+    engine.rootContext()->setContextProperty("back", &model);
 
     engine.load(url);
 

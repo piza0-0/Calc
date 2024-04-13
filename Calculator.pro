@@ -12,15 +12,15 @@ SOURCES += \
     CalcThread.cpp \
     Calculator.cpp \
     GUIThread.cpp \
+    TableModel.cpp \
     main.cpp
 
 HEADERS += \
     CalcThread.h \
     Calculator.h \
-    GUIThread.h
+    GUIThread.h \
+    TableModel.h
 
-#FORMS += \
-#    GUIThread.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

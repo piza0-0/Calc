@@ -2,5 +2,6 @@
     <qresource prefix="/QML"/>
     <qresource prefix="/">
         <file>MainQML.qml</file>
+        <file>CustomButtonGrid.qml</file>
     </qresource>
 </RCC>
