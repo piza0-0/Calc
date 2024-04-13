@@ -29,9 +29,6 @@ int main(int argc, char *argv[])
     qmlRegisterType<TableModel>("TableModel", 1, 0, "TableModel");
 
     TableModel model;
-    engine.rootContext()->setContextProperty("back", &model);
-
-    engine.load(url);
 
     QQueue<QString> que_Request;
     QMutex mtx_Request;
@@ -42,9 +39,15 @@ int main(int argc, char *argv[])
     QWaitCondition cond_Result;
 
     GUIThread gui_thread(que_Request, mtx_Request, cond_Request,
-                         que_Result, mtx_Result, cond_Result);
+                         que_Result, mtx_Result, cond_Result,&app);
     CalcThread calc_Thread(que_Request, mtx_Request, cond_Request,
-                           que_Result, mtx_Result, cond_Result, gui_thread);
+                           que_Result, mtx_Result, cond_Result, gui_thread,&app);
+
+    engine.rootContext()->setContextProperty("model", &model);
+    engine.rootContext()->setContextProperty("gui_thread", &gui_thread);
+
+    engine.load(url);
+
 
     //connect(calc_Thread, &CalcThread::resultIsReady, gui_thread, &GUIThread::on_resultIsReady);
     calc_Thread.start();

@@ -29,16 +29,20 @@ void GUIThread::on_resultIsReady()
     m_mtx_Result->unlock();
 
     qDebug() << result << " 2-ая очередь"<<'\n';
-  //  blockSignals(false);
+    //  blockSignals(false);
+}
+
+void GUIThread::on_equalButtonClicked(QString msg)
+{
+    m_mtx_Request->lock();
+    m_que_Request->enqueue(msg);
+    qDebug() << "main put task..." << '\n';
+    m_cond_Request->wakeOne();
+    m_mtx_Request->unlock();
 }
 
 //void GUIThread::on_pushButton_clicked()
 //{
-//    m_mtx_Request->lock();
-//    m_que_Request->enqueue(msg);
-//    qDebug() << "main put task..." << '\n';
-//    m_cond_Request->wakeOne();
-//    m_mtx_Request->unlock();
 
 //}
 

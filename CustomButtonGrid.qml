@@ -253,6 +253,9 @@ GridLayout {
                 id: butEqual
                 anchors.fill: parent
                 text: "="
+                onClicked:{
+                    equalButtonClicked(txtinput.text)
+                }
             }
         }
         Item{
@@ -316,13 +319,9 @@ GridLayout {
 
 
     }
-    Connections{
-        target: butEqual
+//    Connections{
 
-        function onClicked(){
-            back.writeInTerminal(txtinput.text);
-        }
-    }
+//    }
 //    Connections{
 //        target: back
 //        function onExpressionChanged(){

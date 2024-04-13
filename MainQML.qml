@@ -11,6 +11,9 @@ Window {
     width: 450
     height: 600
     visible: true
+
+    signal equalButtonClicked(string msg)
+
     title: qsTr("Hello World")
 
     TableView {
@@ -56,6 +59,9 @@ Window {
             bottom: parent.bottom
         }
 
+    }
+    Component.onCompleted: {
+        equalButtonClicked.connect(gui_thread.on_equalButtonClicked)
     }
 
 

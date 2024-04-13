@@ -35,12 +35,12 @@ void CalcThread::run()
             break;
         }
 
-        QString msg = m_que_Request->dequeue();
+        QString expression = m_que_Request->dequeue();
         m_mtx_Request->unlock();
 
         double result = 0.0;
         try{
-        result = calc.Calculate("a/0");
+        result = calc.Calculate(expression);
         }catch(std::logic_error& e){
             qDebug() << e.what() << '\n';
         }

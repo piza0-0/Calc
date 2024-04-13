@@ -27,6 +27,7 @@ public:
 
 public slots:
     void on_resultIsReady();
+    void on_equalButtonClicked(QString msg);
 
 private slots:
     //void on_pushButton_clicked();
