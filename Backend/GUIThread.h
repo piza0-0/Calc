@@ -1,6 +1,7 @@
 #ifndef GUITHREAD_H
 #define GUITHREAD_H
 
+
 #include <QObject>
 #include <QMutex>
 #include <QQueue>
@@ -37,9 +38,6 @@ private:
     QQueue<QPair<QString, double>>* m_que_Result;
     QMutex* m_mtx_Result;
     QWaitCondition* m_cond_Result;
-
-    QString msg = "Hello buddy";
-
 
 };
 #endif // GUITHREAD_H

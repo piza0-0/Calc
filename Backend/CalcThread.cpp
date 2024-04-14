@@ -40,12 +40,14 @@ void CalcThread::run()
 
         m_mtx_Request->unlock();
 
-
         double result = 0.0;
+
         try{
-
-            result = calc.Calculate(expression);
-
+            if(useCalcLib == false){
+                result = calc.Calculate(expression);
+            }else{
+                result = calcLib.Calculate(expression); //использование сторонней библиотеки
+            }
         }catch(std::logic_error& e){
 
             qDebug() << e.what() << '\n';
@@ -77,4 +79,9 @@ void CalcThread::stopWaiting()
 void CalcThread::on_setSleepTime(QString sleepTime)
 {
     this->sleepTime = sleepTime.toInt();
+}
+
+void CalcThread::on_useCalcLib(bool calcLib)
+{
+    useCalcLib = calcLib;
 }

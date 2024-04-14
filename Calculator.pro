@@ -1,4 +1,4 @@
-QT       += core gui quick
+QT       += core gui quick qml
 
 #greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -29,3 +29,10 @@ DISTFILES +=
 
 RESOURCES += \
     Frontend/Resources.qrc
+
+unix:!macx: LIBS += -L$$PWD/Lib/bin/ -lCalcLib
+
+INCLUDEPATH += $$PWD/Lib/bin
+DEPENDPATH += $$PWD/Lib/bin
+
+QML_IMPORT_PATH += $$PWD/Frontend

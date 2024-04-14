@@ -5,6 +5,8 @@ import Qt.labs.qmlmodels 1.0
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 1.2 as C1
 import QtQuick.Controls 2.15 as C215
+import QtQuick 2.6 as C6
+import QtQml 2.0
 
 
 Window {
@@ -15,8 +17,10 @@ Window {
 
     signal equalButtonClicked(string msg)
     signal setSleepTime(string sleepTime)
+    signal useCalcLib(bool useLib)
 
     property int requestsNumberLeft: 0
+    property int canUseEqual: 1
 
     title: qsTr("Калькулятор")
 
@@ -132,21 +136,34 @@ Window {
 
 
             C215.CheckBox{
+                id:chBox
                 enabled: true
+                checked: false
                 Layout.alignment: Qt.AlignRight
                 implicitHeight: toolBar.height
                 implicitWidth: toolBar.height
+                onCheckedChanged:{
+                    useCalcLib(chBox.checked)
+                }
             }
         }
 
     }
 
+    Timer {
+        id: timer
+        interval: 1000
+        onTriggered: {
+            canUseEqual = 1
+        }
+    }
 
 
 
     Component.onCompleted: {
         equalButtonClicked.connect(gui_thread.on_equalButtonClicked)
         setSleepTime.connect(clac_thread.on_setSleepTime)
+        useCalcLib.connect(clac_thread.on_useCalcLib)
     }
     Connections{
         target: gui_thread
@@ -166,7 +183,6 @@ Window {
             requestsNumberLeft = left;
         }
     }
-
 
 
 }
