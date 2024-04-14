@@ -1,8 +1,8 @@
 #ifndef CALCTHREAD_H
 #define CALCTHREAD_H
 
-#include "GUIThread.h"
-#include "Calculator.h"
+#include "Backend/GUIThread.h"
+#include "Backend/Calculator.h"
 
 #include <QObject>
 #include <QThread>

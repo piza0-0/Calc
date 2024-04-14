@@ -9,15 +9,15 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    CalcThread.cpp \
-    Calculator.cpp \
-    GUIThread.cpp \
-    main.cpp
+    Backend/CalcThread.cpp \
+    Backend/Calculator.cpp \
+    Backend/GUIThread.cpp \
+    Backend/main.cpp
 
 HEADERS += \
-    CalcThread.h \
-    Calculator.h \
-    GUIThread.h
+    Backend/CalcThread.h \
+    Backend/Calculator.h \
+    Backend/GUIThread.h
 
 
 # Default rules for deployment.
@@ -28,4 +28,4 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 DISTFILES +=
 
 RESOURCES += \
-    Resources.qrc
+    Frontend/Resources.qrc

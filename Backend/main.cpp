@@ -1,5 +1,5 @@
-#include "GUIThread.h"
-#include "CalcThread.h"
+#include "Backend/GUIThread.h"
+#include "Backend/CalcThread.h"
 
 
 #include <QGuiApplication>
@@ -8,7 +8,6 @@
 
 int main(int argc, char *argv[])
 {
-    //QApplication a(argc, argv);
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
