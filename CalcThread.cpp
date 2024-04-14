@@ -3,7 +3,7 @@
 CalcThread::CalcThread(QQueue<QString>& que_Request, QMutex& mtx_Request,
                        QWaitCondition& cond_Request, QQueue<QPair<QString, double>>& que_Result,
                        QMutex& mtx_Result, QWaitCondition& cond_Result, GUIThread& gui_Thread,
-                       QObject *parent)
+                       QThread *parent)
     : QThread(parent),
       m_que_Request(&que_Request), m_mtx_Request(&mtx_Request),
       m_cond_Request(&cond_Request), m_que_Result(&que_Result),
@@ -53,7 +53,7 @@ void CalcThread::run()
             emit calcError(expression, errorLog);
             continue;
         }
-        QThread::sleep(1);
+        QThread::sleep(sleepTime);
         QPair <QString, double> expResult(expression, result);
         m_mtx_Result->lock();
         m_que_Result->enqueue(expResult);
@@ -72,4 +72,9 @@ void CalcThread::stopWaiting()
 {
     QMutexLocker locker(m_mtx_Request);
     m_cond_Request->wakeAll(); // Пробуждаем все потоки, ожидающие на условии
+}
+
+void CalcThread::on_setSleepTime(QString sleepTime)
+{
+    this->sleepTime = sleepTime.toInt();
 }

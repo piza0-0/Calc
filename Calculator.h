@@ -5,11 +5,11 @@
 #include <QRegularExpression>
 #include <stdexcept>
 
-class Calucator
+class Calculator
 {
 public:
-    Calucator() = default;
-    ~Calucator() = default;
+    Calculator() = default;
+    ~Calculator() = default;
 
     double Calculate(const QString& expression);
 private:

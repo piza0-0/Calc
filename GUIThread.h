@@ -7,12 +7,7 @@
 #include <QWaitCondition>
 #include <QDebug>
 
-//QT_BEGIN_NAMESPACE
-//namespace Ui { class GUIThread; }
-//QT_END_NAMESPACE
-
 class GUIThread : public QObject
-        //: public QMainWindow
 {
     Q_OBJECT
 

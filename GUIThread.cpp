@@ -1,6 +1,4 @@
 #include "GUIThread.h"
-#include "ui_GUIThread.h"
-
 
 GUIThread::GUIThread(QQueue<QString>& que_Request, QMutex& mtx_Request,
                      QWaitCondition& cond_Request, QQueue<QPair<QString, double>>& que_Result,

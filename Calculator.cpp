@@ -1,6 +1,6 @@
 #include "Calculator.h"
 
-double Calucator::Calculate(const QString &expression)
+double Calculator::Calculate(const QString &expression)
 {
     int currIndex = 0;
     int opIndex = 0;
@@ -38,7 +38,7 @@ double Calucator::Calculate(const QString &expression)
 
 }
 
-double Calucator::StringToOperand(const QString &str)
+double Calculator::StringToOperand(const QString &str)
 {
     if (str.size() == 0)
      {
@@ -63,7 +63,7 @@ double Calucator::StringToOperand(const QString &str)
      return operand;
 }
 
-double Calucator::MakeOperation(const Operator op, const double OperandA, const double OperandB)
+double Calculator::MakeOperation(const Operator op, const double OperandA, const double OperandB)
 {
     switch (op)
     {

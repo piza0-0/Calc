@@ -4,6 +4,8 @@ import QtQuick 2.12
 import Qt.labs.qmlmodels 1.0
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 1.2 as C1
+import QtQuick.Controls 2.15 as C215
+
 
 Window {
     id: root
@@ -12,6 +14,7 @@ Window {
     visible: true
 
     signal equalButtonClicked(string msg)
+    signal setSleepTime(string sleepTime)
 
     property int requestsNumberLeft: 0
 
@@ -22,8 +25,8 @@ Window {
         //        anchors.fill: parent
         width: parent.width
         height: parent.height/2
-        anchors.top: parent.top
-        anchors.topMargin: status.height
+        anchors.top: toolBar.bottom
+        //anchors.topMargin: status.height
         anchors.horizontalCenter: parent.horizontalCenter
         //columnSpacing: 1
         //rowSpacing: 1
@@ -76,11 +79,74 @@ Window {
                 id:label
                 text: "Запросов осталось: " + requestsNumberLeft
             }
+
         }
     }
 
+
+    Rectangle{
+        id: toolBar
+        width: root.width
+        height: 30
+        anchors.top: status.bottom
+        color: "darkgrey"
+        RowLayout{
+            spacing: 10
+            C1.Label{
+                //Layout.fillHeight: true
+                Layout.leftMargin: 5
+                Layout.rightMargin: 5
+                text: "Задержка (sec)"
+            }
+
+
+            C215.ComboBox {
+                id: cbox
+                implicitHeight: toolBar.height
+                implicitWidth: toolBar.width/6
+                //Layout.fillHeight: true
+                model: ["1", "2", "3", "4", "5",
+                "6","7","8","9","10"]
+
+                onActivated:{
+                    setSleepTime(cbox.currentText)
+                    console.log(cbox.currentText)
+                }
+            }
+
+            Rectangle{
+                id: separator
+                Layout.alignment: Qt.AlignHCenter
+
+                implicitHeight: toolBar.height
+                implicitWidth: toolBar.height
+                color: "grey"
+
+            }
+            C1.Label{
+
+                //Layout.fillHeight: true
+                Layout.alignment: Qt.AlignRight
+                text: "DLL lib"
+            }
+
+
+            C215.CheckBox{
+                enabled: true
+                Layout.alignment: Qt.AlignRight
+                implicitHeight: toolBar.height
+                implicitWidth: toolBar.height
+            }
+        }
+
+    }
+
+
+
+
     Component.onCompleted: {
         equalButtonClicked.connect(gui_thread.on_equalButtonClicked)
+        setSleepTime.connect(clac_thread.on_setSleepTime)
     }
     Connections{
         target: gui_thread

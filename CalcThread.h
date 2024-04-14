@@ -4,6 +4,7 @@
 #include "GUIThread.h"
 #include "Calculator.h"
 
+#include <QObject>
 #include <QThread>
 #include <QMutex>
 #include <QWaitCondition>
@@ -14,12 +15,14 @@
 class CalcThread : public QThread
 {
     Q_OBJECT
+
 public:
 
     explicit CalcThread(QQueue<QString>& que_Request, QMutex& mtx_Request,
                         QWaitCondition& cond_Request, QQueue<QPair<QString, double>>& que_Result,
                         QMutex& mtx_Result, QWaitCondition& cond_Result, GUIThread& gui_Thread,
-                        QObject *parent = nullptr);
+                        QThread *parent_tread = nullptr);
+
     ~CalcThread();
 
     void run() override;
@@ -27,6 +30,9 @@ public:
     void stop();
 
     void stopWaiting();
+
+public slots:
+    void on_setSleepTime(QString sleepTime);
 
 signals:
     void resultIsReady();
@@ -42,9 +48,10 @@ private:
      QMutex* m_mtx_Result;
      QWaitCondition* m_cond_Result;
 
-     Calucator calc;
+     Calculator calc;
      GUIThread *m_gui_Thread;
      bool m_stopRequested = false;
+     int sleepTime = 1;
 };
 
 #endif // CALCTHREAD_H

@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
     GUIThread gui_thread(que_Request, mtx_Request, cond_Request,
                          que_Result, mtx_Result, cond_Result, &app);
     CalcThread calc_Thread(que_Request, mtx_Request, cond_Request,
-                           que_Result, mtx_Result, cond_Result, gui_thread,&app);
+                           que_Result, mtx_Result, cond_Result, gui_thread);
 
     engine.rootContext()->setContextProperty("gui_thread", &gui_thread);
     engine.rootContext()->setContextProperty("clac_thread", &calc_Thread);

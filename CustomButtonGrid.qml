@@ -7,7 +7,7 @@ GridLayout {
     property int  maxsize: 1000/4
     GridLayout{
         id: grd
-        columns: 4
+        columns: 5
         rows: 5
 
         Item{
@@ -18,14 +18,41 @@ GridLayout {
             Layout.fillWidth: true
             Layout.column: 0
             Layout.row: 4
-            Layout.columnSpan: 4
+            Layout.columnSpan: 3
             TextField {
                 id: txtinput
                 anchors.fill: parent
                 placeholderText: qsTr("Enter expression")
+                validator: RegExpValidator { regExp: /[0-9\+\-\*\/]*/ }
                 //horizontalAlignment: Text.AlignRight
+                onAccepted: {
+                    equalButtonClicked(txtinput.text)
+                    txtinput.clear()
+                }
+
             }
         }
+
+        Item{
+            //Layout.maximumWidth: maxsize
+           //Layout.fillHeight: true
+            implicitHeight: 40
+            Layout.fillWidth: true
+            Layout.column: 3
+            Layout.row: 4
+            RoundButton{
+                id: undo
+                anchors.fill: parent
+                text: "⌫"
+                MouseArea{
+                    anchors.fill: parent
+                    onClicked:{
+                        txtinput.remove(txtinput.length, txtinput.length-1)
+                    }
+                }
+            }
+        }
+
         //кнопки чисел
         Item{
             Layout.maximumWidth: maxsize
@@ -40,7 +67,7 @@ GridLayout {
                 MouseArea{
                     anchors.fill: parent
                     onClicked:{
-                        txtinput.insert(0,"7")
+                        txtinput.insert(txtinput.length,"7")
                     }
                 }
             }
@@ -60,7 +87,7 @@ GridLayout {
                 MouseArea{
                     anchors.fill: parent
                     onClicked:{
-                        txtinput.insert(0,"8")
+                        txtinput.insert(txtinput.length,"8")
                     }
                 }
             }
@@ -80,7 +107,7 @@ GridLayout {
                 MouseArea{
                     anchors.fill: parent
                     onClicked:{
-                        txtinput.insert(0,"9")
+                        txtinput.insert(txtinput.length,"9")
                     }
                 }
 
@@ -101,7 +128,7 @@ GridLayout {
                 MouseArea{
                     anchors.fill: parent
                     onClicked:{
-                        txtinput.insert(0,"4")
+                        txtinput.insert(txtinput.length,"4")
                     }
                 }
 
@@ -121,7 +148,7 @@ GridLayout {
                 MouseArea{
                     anchors.fill: parent
                     onClicked:{
-                        txtinput.insert(0,"5")
+                        txtinput.insert(txtinput.length,"5")
                     }
                 }
             }
@@ -140,7 +167,7 @@ GridLayout {
                 MouseArea{
                     anchors.fill: parent
                     onClicked:{
-                        txtinput.insert(0,"6")
+                        txtinput.insert(txtinput.length,"6")
                     }
                 }
             }
@@ -159,7 +186,7 @@ GridLayout {
                 MouseArea{
                     anchors.fill: parent
                     onClicked:{
-                        txtinput.insert(0,"1")
+                        txtinput.insert(txtinput.length,"1")
                     }
                 }
             }
@@ -178,7 +205,7 @@ GridLayout {
                 MouseArea{
                     anchors.fill: parent
                     onClicked:{
-                        txtinput.insert(0,"2")
+                        txtinput.insert(txtinput.length,"2")
                     }
                 }
             }
@@ -197,7 +224,7 @@ GridLayout {
                 MouseArea{
                     anchors.fill: parent
                     onClicked:{
-                        txtinput.insert(0,"3")
+                        txtinput.insert(txtinput.length,"3")
                     }
                 }
             }
@@ -217,7 +244,7 @@ GridLayout {
                 MouseArea{
                     anchors.fill: parent
                     onClicked:{
-                        txtinput.insert(0,"0")
+                        txtinput.insert(txtinput.length,"0")
                     }
                 }
             }
@@ -237,7 +264,7 @@ GridLayout {
                 MouseArea{
                     anchors.fill: parent
                     onClicked:{
-                        txtinput.insert(0,".")
+                        txtinput.insert(txtinput.length,".")
                     }
                 }
             }
@@ -246,12 +273,15 @@ GridLayout {
 
             Layout.fillHeight: true
             Layout.fillWidth: true
-            Layout.column: 3
-            Layout.row: 3
+            Layout.column: 4
+            Layout.row: 2
+            Layout.rowSpan: 2
 
             RoundButton{
                 id: butEqual
                 anchors.fill: parent
+                anchors.rightMargin: 5
+                anchors.leftMargin: 5
                 text: "="
                 onClicked:{
                     equalButtonClicked(txtinput.text)
@@ -273,7 +303,7 @@ GridLayout {
                 MouseArea{
                     anchors.fill: parent
                     onClicked:{
-                        txtinput.insert(0,"+")
+                        txtinput.insert(txtinput.length,"+")
                     }
                 }
             }
@@ -292,7 +322,7 @@ GridLayout {
                 MouseArea{
                     anchors.fill: parent
                     onClicked:{
-                        txtinput.insert(0,"-")
+                        txtinput.insert(txtinput.length,"-")
                     }
                 }
             }
@@ -312,7 +342,7 @@ GridLayout {
                 MouseArea{
                     anchors.fill: parent
                     onClicked:{
-                        txtinput.insert(0,"*")
+                        txtinput.insert(txtinput.length,"*")
                     }
                 }
             }
