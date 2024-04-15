@@ -25,17 +25,12 @@ Window {
     title: qsTr("Калькулятор")
 
     TableView {
-        id: tv
-        //        anchors.fill: parent
+        id: tv        
         width: parent.width
         height: parent.height/2
         anchors.top: toolBar.bottom
-        //anchors.topMargin: status.height
         anchors.horizontalCenter: parent.horizontalCenter
-        //columnSpacing: 1
-        //rowSpacing: 1
         clip: true
-
 
         model: TableModel {
             id: tModel
@@ -47,7 +42,7 @@ Window {
             id:deleg
             implicitWidth: root.width/2
             implicitHeight: 50
-            color: "grey"
+            color: "#4587ba"
             Text {
                 text: display
                 anchors.centerIn: deleg
@@ -61,10 +56,8 @@ Window {
         }
 
     }
-
-    CustomButtonGrid{
-        id: custgrid
-        Layout.maximumWidth: 1000
+    Rectangle{
+        id: gridRect
         width: root.width
         height: root.height/2
         anchors{
@@ -73,6 +66,12 @@ Window {
         }
 
     }
+    CustomButtonGrid{
+        id: custgrid
+        anchors.fill: gridRect
+        anchors.margins: 10
+    }
+
 
 
     C1.StatusBar {
@@ -93,7 +92,7 @@ Window {
         width: root.width
         height: 30
         anchors.top: status.bottom
-        color: "darkgrey"
+        color: "#918d8d"
         RowLayout{
             spacing: 10
             C1.Label{
@@ -110,7 +109,7 @@ Window {
                 implicitWidth: toolBar.width/6
                 //Layout.fillHeight: true
                 model: ["1", "2", "3", "4", "5",
-                "6","7","8","9","10"]
+                    "6","7","8","9","10"]
 
                 onActivated:{
                     setSleepTime(cbox.currentText)
@@ -124,7 +123,7 @@ Window {
 
                 implicitHeight: toolBar.height
                 implicitWidth: toolBar.height
-                color: "grey"
+                color: "#918d8d"
 
             }
             C1.Label{

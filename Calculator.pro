@@ -1,4 +1,4 @@
-QT       += core gui quick qml
+QT       += core gui quick
 
 #greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -25,7 +25,8 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-DISTFILES +=
+DISTFILES += \
+
 
 RESOURCES += \
     Frontend/Resources.qrc
@@ -35,4 +36,4 @@ unix:!macx: LIBS += -L$$PWD/Lib/bin/ -lCalcLib
 INCLUDEPATH += $$PWD/Lib/bin
 DEPENDPATH += $$PWD/Lib/bin
 
-QML_IMPORT_PATH += $$PWD/Frontend
+QML_IMPORT_PATH += $$PWD
