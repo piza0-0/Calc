@@ -38,12 +38,12 @@ GridLayout{
             validator: RegExpValidator { regExp: /[0-9\+\.\-\*\/]*/ }
             //horizontalAlignment: Text.AlignRight
             onAccepted: {
-                if(canUseEqual){
+//                if(canUseEqual){
                     equalButtonClicked(txtinput.text)
                     txtinput.clear()
-                    canUseEqual = 0
-                    timer.start()
-                }
+//                    canUseEqual = 0
+//                    timer.start()
+//                }
             }
 
         }
@@ -586,12 +586,12 @@ GridLayout{
             }
 
             onClicked:{
-                if(canUseEqual){
+ //               if(canUseEqual){
                     equalButtonClicked(txtinput.text)
                     txtinput.clear()
-                    canUseEqual = 0
-                    timer.start()
-                }
+//                    canUseEqual = 0
+//                    timer.start()
+ //               }
             }
         }
     }

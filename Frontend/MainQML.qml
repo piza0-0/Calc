@@ -6,7 +6,7 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls 1.2 as C1
 import QtQuick.Controls 2.15 as C215
 import QtQuick 2.6 as C6
-import QtQml 2.0
+//import QtQml 2.0
 
 
 Window {
@@ -149,13 +149,13 @@ Window {
 
     }
 
-    Timer {
-        id: timer
-        interval: 1000
-        onTriggered: {
-            canUseEqual = 1
-        }
-    }
+//    Timer {
+//        id: timer
+//        interval: 1000
+//        onTriggered: {
+//            canUseEqual = 1
+//        }
+//    }
 
 
 
