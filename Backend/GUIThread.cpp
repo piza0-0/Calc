@@ -8,9 +8,7 @@ GUIThread::GUIThread(QQueue<QString>& que_Request, QMutex& mtx_Request,
       m_que_Request(&que_Request), m_mtx_Request(&mtx_Request),
       m_cond_Request(&cond_Request), m_que_Result(&que_Result),
       m_mtx_Result(&mtx_Result), m_cond_Result(&cond_Result)
-    //  ui(new Ui::GUIThread)
 {
-    //ui->setupUi(this);
 
 }
 

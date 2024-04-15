@@ -5,6 +5,7 @@
 #include <QGuiApplication>
 #include <QQmlContext>
 #include <QQmlApplicationEngine>
+#include <QDebug>
 
 int main(int argc, char *argv[])
 {
@@ -16,7 +17,6 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-    engine.addImportPath("qrc:/");
     const QUrl url(QStringLiteral("qrc:/MainQML.qml"));
 
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

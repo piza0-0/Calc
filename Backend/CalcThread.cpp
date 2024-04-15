@@ -10,6 +10,7 @@ CalcThread::CalcThread(QQueue<QString>& que_Request, QMutex& mtx_Request,
       m_mtx_Result(&mtx_Result), m_cond_Result(&cond_Result),m_gui_Thread(&gui_Thread)
 {
     connect(this, &CalcThread::resultIsReady, m_gui_Thread, &GUIThread::on_resultIsReady);
+
 }
 
 CalcThread::~CalcThread()
@@ -18,6 +19,7 @@ CalcThread::~CalcThread()
     stopWaiting(); //будим потоки, если ожидают сигнала
     wait(); // ожидание окончания работы потока
     m_mtx_Request->unlock(); //освобождение мьютексов
+    //delete m_calcLib;
     qDebug() << "Worker is dead!" << '\n';
 
 }
@@ -43,11 +45,7 @@ void CalcThread::run()
         double result = 0.0;
 
         try{
-            if(useCalcLib == false){
                 result = calc.Calculate(expression);
-            }else{
-                result = calcLib.Calculate(expression); //использование сторонней библиотеки
-            }
         }catch(std::logic_error& e){
 
             qDebug() << e.what() << '\n';
@@ -55,7 +53,7 @@ void CalcThread::run()
             emit calcError(expression, errorLog);
             continue;
         }
-        QThread::sleep(sleepTime);
+        QThread::sleep(m_sleepTime);
         QPair <QString, double> expResult(expression, result);
         m_mtx_Result->lock();
         m_que_Result->enqueue(expResult);
@@ -78,10 +76,6 @@ void CalcThread::stopWaiting()
 
 void CalcThread::on_setSleepTime(QString sleepTime)
 {
-    this->sleepTime = sleepTime.toInt();
+    this->m_sleepTime = sleepTime.toInt();
 }
 
-void CalcThread::on_useCalcLib(bool calcLib)
-{
-    useCalcLib = calcLib;
-}

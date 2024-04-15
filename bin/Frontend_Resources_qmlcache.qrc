@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<RCC>
-    <qresource prefix="/QML"/>
-    <qresource prefix="/">
-        <file alias="MainQML.qml">../Frontend/MainQML.qml</file>
-        <file alias="CustomButtonGrid.qml">../Frontend/CustomButtonGrid.qml</file>
-    </qresource>
-</RCC>

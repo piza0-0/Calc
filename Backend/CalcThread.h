@@ -3,7 +3,6 @@
 
 #include "Backend/GUIThread.h"
 #include "Backend/Calculator.h"
-#include "Lib/CalcLib.h"
 
 #include <QObject>
 #include <QThread>
@@ -34,7 +33,6 @@ public:
 
 public slots:
     void on_setSleepTime(QString sleepTime);
-    void on_useCalcLib(bool calcLib);
 
 signals:
     void resultIsReady();
@@ -53,10 +51,8 @@ private:
      Calculator calc;
      GUIThread *m_gui_Thread;
      bool m_stopRequested = false;
-     int sleepTime = 1;
+     int m_sleepTime = 1;
 
-     CalcLib calcLib;
-     bool useCalcLib = 0;
 };
 
 #endif // CALCTHREAD_H

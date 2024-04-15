@@ -7,12 +7,6 @@ GridLayout{
     id: custgrid
     columns: 4
     rows: 5
-    //    anchors{
-    //        bottomMargin: 10
-    //        leftMargin: 20
-    //        rightMargin: 40
-    //    }
-
     Item{
         id: it1
         //Layout.fillHeight: true
@@ -36,22 +30,19 @@ GridLayout{
             }
 
             validator: RegExpValidator { regExp: /[0-9\+\.\-\*\/]*/ }
-            //horizontalAlignment: Text.AlignRight
             onAccepted: {
-//                if(canUseEqual){
+                if(canUseEqual){
                     equalButtonClicked(txtinput.text)
                     txtinput.clear()
-//                    canUseEqual = 0
-//                    timer.start()
-//                }
+                    canUseEqual = 0
+                    timer.start()
+                }
             }
 
         }
     }
 
     Item{
-        //Layout.maximumWidth: maxsize
-        //Layout.fillHeight: true
         implicitHeight: 50
         Layout.fillWidth: true
         Layout.column: 2
@@ -76,8 +67,8 @@ GridLayout{
                 implicitHeight: 50
                 radius: 30
                 color: parent.pressed ? pressedColor :
-                       parent.hovered ? hoveredColor :
-                                            normalColor
+                                        parent.hovered ? hoveredColor :
+                                                         normalColor
             }
             MouseArea{
                 anchors.fill: parent
@@ -114,8 +105,8 @@ GridLayout{
                 implicitHeight: 50
                 radius: 30
                 color: parent.pressed ? pressedColor :
-                       parent.hovered ? hoveredColor :
-                                            normalColor
+                                        parent.hovered ? hoveredColor :
+                                                         normalColor
             }
 
             MouseArea{
@@ -155,8 +146,8 @@ GridLayout{
                 implicitHeight: 50
                 radius: 30
                 color: parent.pressed ? pressedColor :
-                       parent.hovered ? hoveredColor :
-                                            normalColor
+                                        parent.hovered ? hoveredColor :
+                                                         normalColor
             }
 
             MouseArea{
@@ -193,8 +184,8 @@ GridLayout{
                 implicitHeight: 50
                 radius: 30
                 color: parent.pressed ? pressedColor :
-                       parent.hovered ? hoveredColor :
-                                            normalColor
+                                        parent.hovered ? hoveredColor :
+                                                         normalColor
             }
 
             MouseArea{
@@ -232,8 +223,8 @@ GridLayout{
                 implicitHeight: 50
                 radius: 30
                 color: parent.pressed ? pressedColor :
-                       parent.hovered ? hoveredColor :
-                                            normalColor
+                                        parent.hovered ? hoveredColor :
+                                                         normalColor
             }
 
             MouseArea{
@@ -271,8 +262,8 @@ GridLayout{
                 implicitHeight: 50
                 radius: 30
                 color: parent.pressed ? pressedColor :
-                       parent.hovered ? hoveredColor :
-                                            normalColor
+                                        parent.hovered ? hoveredColor :
+                                                         normalColor
             }
 
             MouseArea{
@@ -309,8 +300,8 @@ GridLayout{
                 implicitHeight: 50
                 radius: 30
                 color: parent.pressed ? pressedColor :
-                       parent.hovered ? hoveredColor :
-                                            normalColor
+                                        parent.hovered ? hoveredColor :
+                                                         normalColor
             }
 
             MouseArea{
@@ -348,8 +339,8 @@ GridLayout{
                 implicitHeight: 50
                 radius: 30
                 color: parent.pressed ? pressedColor :
-                       parent.hovered ? hoveredColor :
-                                            normalColor
+                                        parent.hovered ? hoveredColor :
+                                                         normalColor
             }
 
             MouseArea{
@@ -387,8 +378,8 @@ GridLayout{
                 implicitHeight: 50
                 radius: 30
                 color: parent.pressed ? pressedColor :
-                       parent.hovered ? hoveredColor :
-                                            normalColor
+                                        parent.hovered ? hoveredColor :
+                                                         normalColor
             }
 
             MouseArea{
@@ -426,8 +417,8 @@ GridLayout{
                 implicitHeight: 50
                 radius: 30
                 color: parent.pressed ? pressedColor :
-                       parent.hovered ? hoveredColor :
-                                            normalColor
+                                        parent.hovered ? hoveredColor :
+                                                         normalColor
             }
 
             MouseArea{
@@ -466,8 +457,8 @@ GridLayout{
                 implicitHeight: 50
                 radius: 30
                 color: parent.pressed ? pressedColor :
-                       parent.hovered ? hoveredColor :
-                                            normalColor
+                                        parent.hovered ? hoveredColor :
+                                                         normalColor
             }
 
             MouseArea{
@@ -506,8 +497,8 @@ GridLayout{
                 implicitHeight: 50
                 radius: 30
                 color: parent.pressed ? pressedColor :
-                       parent.hovered ? hoveredColor :
-                                            normalColor
+                                        parent.hovered ? hoveredColor :
+                                                         normalColor
             }
 
             MouseArea{
@@ -544,8 +535,8 @@ GridLayout{
                 implicitHeight: 50
                 radius: 30
                 color: parent.pressed ? pressedColor :
-                       parent.hovered ? hoveredColor :
-                                            normalColor
+                                        parent.hovered ? hoveredColor :
+                                                         normalColor
             }
 
             MouseArea{
@@ -581,17 +572,17 @@ GridLayout{
                 implicitHeight: 50
                 radius: 30
                 color: parent.pressed ? pressedColor :
-                       parent.hovered ? hoveredColor :
-                                            normalColor
+                                        parent.hovered ? hoveredColor :
+                                                         normalColor
             }
 
             onClicked:{
- //               if(canUseEqual){
+                if(canUseEqual){
                     equalButtonClicked(txtinput.text)
                     txtinput.clear()
-//                    canUseEqual = 0
-//                    timer.start()
- //               }
+                    canUseEqual = 0
+                    timer.start()
+                }
             }
         }
     }
@@ -622,8 +613,8 @@ GridLayout{
                 implicitHeight: 50
                 radius: 30
                 color: parent.pressed ? pressedColor :
-                       parent.hovered ? hoveredColor :
-                                            normalColor
+                                        parent.hovered ? hoveredColor :
+                                                         normalColor
             }
 
             MouseArea{
@@ -661,8 +652,8 @@ GridLayout{
                 implicitHeight: 50
                 radius: 30
                 color: parent.pressed ? pressedColor :
-                       parent.hovered ? hoveredColor :
-                                            normalColor
+                                        parent.hovered ? hoveredColor :
+                                                         normalColor
             }
 
             MouseArea{
@@ -699,8 +690,8 @@ GridLayout{
                 implicitHeight: 50
                 radius: 30
                 color: parent.pressed ? pressedColor :
-                       parent.hovered ? hoveredColor :
-                                            normalColor
+                                        parent.hovered ? hoveredColor :
+                                                         normalColor
             }
 
             MouseArea{
